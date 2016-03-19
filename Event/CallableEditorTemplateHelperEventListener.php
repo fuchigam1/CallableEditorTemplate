@@ -53,6 +53,14 @@ class CallableEditorTemplateHelperEventListener extends BcHelperEventListener
 			return;
 		}
 
+		if (!Hash::get($View->request->data, 'CallableEditorTemplateConfig')) {
+			return;
+		}
+
+		if (!Hash::get($View->request->data, 'CallableEditorTemplateConfig.status')) {
+			return;
+		}
+
 		// ブログ記事：エディターテンプレート呼出欄を表示する
 		echo $View->element('CallableEditorTemplate.callable_editor_template_form');
 	}

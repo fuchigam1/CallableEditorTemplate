@@ -9,6 +9,21 @@
  */
 App::uses('CallableEditorTemplateUtil', 'CallableEditorTemplate.Lib');
 /**
+ * システムナビ
+ */
+$config['BcApp.adminNavi.callable_editor_template'] = array(
+	'name'		=> 'コーラブルエディターテンプレート プラグイン',
+	'contents'	=> array(
+		array('name' => 'コーラブルエディターテンプレート設定一覧',
+			'url' => array(
+				'admin' => true,
+				'plugin' => 'callable_editor_template',
+				'controller' => 'callable_editor_template_configs',
+				'action' => 'index')
+		)
+	)
+);
+/**
  * モデル判定用設定
  * 
  */

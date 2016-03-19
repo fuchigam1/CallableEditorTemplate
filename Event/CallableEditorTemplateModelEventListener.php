@@ -20,6 +20,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 		'Blog.BlogPost.beforeFind',
 		'Blog.BlogPost.afterDelete',
 		'Blog.BlogPost.afterSave',
+		'Blog.BlogContent.afterDelete',
 	);
 
 	/**
@@ -48,7 +49,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 			'CallableEditorTemplate' => array(
 				'className' => 'CallableEditorTemplate.CallableEditorTemplate',
 				'conditions' => array(
-					'model' => $Model->alias
+					'CallableEditorTemplate.model' => $Model->alias
 				),
 				'foreignKey' => 'model_id'
 			)
@@ -68,7 +69,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 			'CallableEditorTemplate' => array(
 				'className' => 'CallableEditorTemplate.CallableEditorTemplate',
 				'conditions' => array(
-					'model' => $Model->alias
+					'CallableEditorTemplate.model' => $Model->alias
 				),
 				'foreignKey' => 'model_id'
 			)
@@ -115,6 +116,28 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 		if ($data) {
 			if (!$CallableEditorTemplateModel->delete($data['CallableEditorTemplate']['id'])) {
 				$this->log('ID:' . $data['CallableEditorTemplate']['id'] . 'のコーラブルエディターテンプレートの削除に失敗しました。');
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * blogBlogContentAfterDelete
+	 * 
+	 * @param CakeEvent $event
+	 */
+	public function blogBlogContentAfterDelete(CakeEvent $event)
+	{
+		$Model = $event->subject();
+		// ブログ設定削除時、そのコンテンツが持つコーラブルエディターテンプレート設定情報を削除する
+		$CallableEditorTemplateConfigModel = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplateConfig');
+		$data = $CallableEditorTemplateConfigModel->find('first', array('conditions' => array(
+			'CallableEditorTemplateConfig.model' => $Model->alias,
+			'CallableEditorTemplateConfig.content_id' => $Model->id
+		)));
+		if ($data) {
+			if (!$CallableEditorTemplateConfigModel->delete($data['CallableEditorTemplateConfig']['id'])) {
+				$this->log('ID:' . $data['CallableEditorTemplateConfig']['id'] . 'のコーラブルエディターテンプレート設定の削除に失敗しました。');
 			}
 		}
 		return true;

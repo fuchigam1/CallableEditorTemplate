@@ -7,14 +7,14 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplate extends BcPluginAppModel
+class CallableEditorTemplateConfig extends BcPluginAppModel
 {
 	/**
 	 * ModelName
 	 * 
 	 * @var string
 	 */
-	public $name = 'CallableEditorTemplate';
+	public $name = 'CallableEditorTemplateConfig';
 
 	/**
 	 * PluginName
@@ -31,33 +31,15 @@ class CallableEditorTemplate extends BcPluginAppModel
 	public $actsAs = array('BcCache');
 
 	/**
-	 * belongsTo
-	 * 
-	 * @var array
-	 */
-	public $belongsTo = array(
-		'EditorTemplate' => array(
-			'className'	=> 'EditorTemplate',
-			'foreignKey' => 'editor_template_id',
-		)
-	);
-
-	/**
-	 * バリデーション
-	 *
-	 */
-	public $validate = array(
-	);
-
-	/**
 	 * 初期値を取得する
 	 *
 	 * @return array
 	 */
-	public function getDefaultValue() {
+	public function getDefaultValue()
+	{
 		$data = array(
 			$this->name => array(
-				'status' => true,
+				'status' => false,
 			)
 		);
 		return $data;

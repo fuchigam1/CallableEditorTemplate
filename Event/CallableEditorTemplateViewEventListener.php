@@ -17,6 +17,8 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	public $events = array(
 		'contentHeader',
 		'contentFooter',
+		'Pages.beforeRender',
+		'Blog.BlogPosts.beforeRender',
 	);
 
 	/**
@@ -40,7 +42,87 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 */
 	private $callableEditorTemplateData = array();
 
+	/**
+	 * 現在のイベント名
+	 * 
+	 * @var String
+	 */
 	private $currentEventName = '';
+
+	/**
+	 * CallableEditorTemplate設定モデル
+	 * 
+	 * @var Object
+	 */
+	private $CallableEditorTemplateConfigModel = null;
+
+	/**
+	 * 処理対象アクション
+	 * 
+	 * @var array
+	 */
+	private $targetAction = array('admin_edit', 'admin_add');
+
+	/**
+	 * CallableEditorTemplateConfig モデルを準備する
+	 * 
+	 */
+	private function setUpModel()
+	{
+		if (ClassRegistry::isKeySet('CallableEditorTemplate.CallableEditorTemplateConfig')) {
+			$this->CallableEditorTemplateConfigModel = ClassRegistry::getObject('CallableEditorTemplate.CallableEditorTemplateConfig');
+		} else {
+			$this->CallableEditorTemplateConfigModel = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplateConfig');
+		}
+	}
+
+	/**
+	 * pagesBeforeRender
+	 * 
+	 * @param CakeEvent $event
+	 */
+	public function pagesBeforeRender(CakeEvent $event)
+	{
+		if (!BcUtil::isAdminSystem()) {
+			return;
+		}
+
+		$View = $event->subject();
+		if (in_array($View->request->params['action'], $this->targetAction)) {
+			$this->setUpModel();
+			$data = $this->CallableEditorTemplateConfigModel->find('first', array('conditions' => array(
+				'CallableEditorTemplateConfig.model' => 'Page',
+				'CallableEditorTemplateConfig.content_id' => 0
+			)));
+			if ($data) {
+				$View->request->data['CallableEditorTemplateConfig'] = $data['CallableEditorTemplateConfig'];
+			}
+		}
+	}
+
+	/**
+	 * blogBlogPostBeforeRender
+	 * 
+	 * @param CakeEvent $event
+	 */
+	public function blogBlogPostsBeforeRender(CakeEvent $event)
+	{
+		if (!BcUtil::isAdminSystem()) {
+			return;
+		}
+
+		$View = $event->subject();
+		if (in_array($View->request->params['action'], $this->targetAction)) {
+			$this->setUpModel();
+			$data = $this->CallableEditorTemplateConfigModel->find('first', array('conditions' => array(
+				'CallableEditorTemplateConfig.model' => 'BlogContent',
+				'CallableEditorTemplateConfig.content_id' => $View->viewVars['blogContent']['BlogContent']['id']
+			)));
+			if ($data) {
+				$View->request->data['CallableEditorTemplateConfig'] = $data['CallableEditorTemplateConfig'];
+			}
+		}
+	}
 
 	/**
 	 * モデル初期化
