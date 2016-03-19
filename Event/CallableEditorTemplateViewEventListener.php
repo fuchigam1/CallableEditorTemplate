@@ -145,10 +145,12 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 */
 	public function contentHeader(CakeEvent $event)
 	{
-		if (BcUtil::isAdminSystem()) {
-			return;
-		}
 		$View = $event->subject();
+		if (BcUtil::isAdminSystem()) {
+			if (!Hash::get($View->viewVars, 'preview')) {
+				return;
+			}
+		}
 		$this->currentEventName = $event->name();
 
 		if (!Hash::get($View->request->params, 'models')) {
@@ -212,10 +214,12 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 */
 	public function contentFooter(CakeEvent $event)
 	{
-		if (BcUtil::isAdminSystem()) {
-			return;
-		}
 		$View = $event->subject();
+		if (BcUtil::isAdminSystem()) {
+			if (!Hash::get($View->viewVars, 'preview')) {
+				return;
+			}
+		}
 		$this->currentEventName = $event->name();
 
 		if (!$this->callableEditorTemplateData) {
