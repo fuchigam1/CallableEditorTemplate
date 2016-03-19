@@ -21,7 +21,8 @@ class CallableEditorTemplatesSchema extends CakeSchema {
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null, 'comment' => '更新日時'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null, 'comment' => '作成日時'),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'editor_template_id' => array('column' => 'editor_template_id', 'unique' => 0),
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
