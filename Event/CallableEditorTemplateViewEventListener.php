@@ -164,6 +164,22 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		if ($View->BcBaser->isPage()) {
 			$modelName = 'Page';
 			$modelId = Hash::get($View->request->data, 'Page.id');
+
+			$this->setUpModel();
+			$configData = $this->CallableEditorTemplateConfigModel->find('first', array(
+				'conditions' => array(
+					'CallableEditorTemplateConfig.model' => 'Page',
+					'CallableEditorTemplateConfig.content_id' => 0,
+				),
+				'recursive' => -1,
+				'callbacks' => false,
+			));
+			if (!$configData) {
+				return;
+			}
+			if (!Hash::get($configData, 'CallableEditorTemplateConfig.status')) {
+				return;
+			}
 		} else {
 			// 記事詳細は「single」変数定義を持つことを前提とする（例: ブログ記事詳細）
 			if (!Hash::get($View->viewVars, 'single')) {
@@ -176,6 +192,23 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 					$modelName = $setting['name'];
 					$targetData = $View->viewVars[$setting['model_data']];
 					$modelId = $targetData[$modelName]['id'];
+
+					// TODO: 設定ファイルから汎用的に設定データを取得できるようにする
+					$this->setUpModel();
+					$configData = $this->CallableEditorTemplateConfigModel->find('first', array(
+						'conditions' => array(
+							'CallableEditorTemplateConfig.model' => 'BlogContent',
+							'CallableEditorTemplateConfig.content_id' => $targetData[$modelName]['blog_content_id'],
+						),
+						'recursive' => -1,
+						'callbacks' => false,
+					));
+					if (!$configData) {
+						return;
+					}
+					if (!Hash::get($configData, 'CallableEditorTemplateConfig.status')) {
+						return;
+					}
 				}
 			} else {
 				// コア機能は固定ページのみ対応
