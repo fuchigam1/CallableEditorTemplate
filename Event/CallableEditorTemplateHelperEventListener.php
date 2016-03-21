@@ -53,11 +53,11 @@ class CallableEditorTemplateHelperEventListener extends BcHelperEventListener
 			return;
 		}
 
-		if (!Hash::get($View->request->data, 'CallableEditorTemplateConfig')) {
+		if (!$View->get('callableEditorTemplateConfig')) {
 			return;
 		}
 
-		if (!Hash::get($View->request->data, 'CallableEditorTemplateConfig.status')) {
+		if (!Hash::get($View->get('callableEditorTemplateConfig'), 'status')) {
 			return;
 		}
 

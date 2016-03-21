@@ -74,6 +74,12 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		} else {
 			$this->CallableEditorTemplateConfigModel = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplateConfig');
 		}
+
+		if (ClassRegistry::isKeySet('EditorTemplate')) {
+			$this->EditorTemplateModel = ClassRegistry::getObject('EditorTemplate');
+		} else {
+			$this->EditorTemplateModel = ClassRegistry::init('EditorTemplate');
+		}
 	}
 
 	/**
@@ -90,13 +96,19 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		$View = $event->subject();
 		if (in_array($View->request->params['action'], $this->targetAction)) {
 			$this->setUpModel();
-			$data = $this->CallableEditorTemplateConfigModel->find('first', array('conditions' => array(
-				'CallableEditorTemplateConfig.model' => 'Page',
-				'CallableEditorTemplateConfig.content_id' => 0
-			)));
+			$data = $this->CallableEditorTemplateConfigModel->find('first', array(
+				'conditions' => array(
+					'CallableEditorTemplateConfig.model' => 'Page',
+					'CallableEditorTemplateConfig.content_id' => 0,
+				),
+				'recursive' => -1,
+				'callbacks' => false,
+			));
 			if ($data) {
-				$View->request->data['CallableEditorTemplateConfig'] = $data['CallableEditorTemplateConfig'];
+				$View->set('callableEditorTemplateConfig', $data['CallableEditorTemplateConfig']);
 			}
+			$editorTemplateList = $this->EditorTemplateModel->find('list');
+			$View->set('editorTemplateList', $editorTemplateList);
 		}
 	}
 
@@ -114,13 +126,19 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		$View = $event->subject();
 		if (in_array($View->request->params['action'], $this->targetAction)) {
 			$this->setUpModel();
-			$data = $this->CallableEditorTemplateConfigModel->find('first', array('conditions' => array(
-				'CallableEditorTemplateConfig.model' => 'BlogContent',
-				'CallableEditorTemplateConfig.content_id' => $View->viewVars['blogContent']['BlogContent']['id']
-			)));
+			$data = $this->CallableEditorTemplateConfigModel->find('first', array(
+				'conditions' => array(
+					'CallableEditorTemplateConfig.model' => 'BlogContent',
+					'CallableEditorTemplateConfig.content_id' => $View->viewVars['blogContent']['BlogContent']['id'],
+				),
+				'recursive' => -1,
+				'callbacks' => false,
+			));
 			if ($data) {
-				$View->request->data['CallableEditorTemplateConfig'] = $data['CallableEditorTemplateConfig'];
+				$View->set('callableEditorTemplateConfig', $data['CallableEditorTemplateConfig']);
 			}
+			$editorTemplateList = $this->EditorTemplateModel->find('list');
+			$View->set('editorTemplateList', $editorTemplateList);
 		}
 	}
 
