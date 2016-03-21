@@ -76,7 +76,7 @@ if (count($blogContentDatas) > 0) {
 	<?php if ($hasAddableBlog): ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('CallableEditorTemplateConfig.status', 'コーラブルエディターテンプレートの利用') ?>
+			<?php echo $this->BcForm->label('CallableEditorTemplateConfig.status', '利用状態') ?>
 			<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigStatus', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
 			<div id="helptextCallableEditorTemplateConfigStatus" class="helptext">
 				<ul>
@@ -87,6 +87,21 @@ if (count($blogContentDatas) > 0) {
 		<td class="col-input">
 			<?php echo $this->BcForm->input('CallableEditorTemplateConfig.status', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
 			<?php echo $this->BcForm->error('CallableEditorTemplateConfig.status') ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
+			<?php echo $this->BcForm->label('CallableEditorTemplateConfig.title', 'タイトル') ?>
+			<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigTitle', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
+			<div id="helptextCallableEditorTemplateConfigTitle" class="helptext">
+				<ul>
+					<li>記事編集画面に表示する見出しを指定できます。</li>
+				</ul>
+			</div>
+		</th>
+		<td class="col-input">
+			<?php echo $this->BcForm->input('CallableEditorTemplateConfig.title', array('type' => 'text', 'maxlength' => 255, 'class' => 'full-width', 'counter' => true, 'placeholder' => Configure::read('CallableEditorTemplate.label_name'))) ?>
+			<?php echo $this->BcForm->error('CallableEditorTemplateConfig.title') ?>
 		</td>
 	</tr>
 	<?php endif ?>

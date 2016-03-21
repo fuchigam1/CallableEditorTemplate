@@ -42,7 +42,16 @@ $class=' class="'.implode(' ', $classies).'"';
 	</td>
 	<td style="width: 45px;"><?php echo $data['CallableEditorTemplateConfig']['id']; ?></td>
 	<td>
-		<?php echo $this->BcBaser->link($blogContentDatas[$data['CallableEditorTemplateConfig']['content_id']], array('action' => 'edit', $data['CallableEditorTemplateConfig']['id']), array('title' => '編集')) ?>
+		<?php echo $this->BcBaser->link($blogContentDatas[$data['CallableEditorTemplateConfig']['content_id']],
+			array('action' => 'edit', $data['CallableEditorTemplateConfig']['id']),
+			array('title' => '編集')
+		) ?>
+	</td>
+	<td>
+		<?php echo $this->BcBaser->link($data['CallableEditorTemplateConfig']['title'],
+			array('action' => 'edit', $data['CallableEditorTemplateConfig']['id']),
+			array('title' => '編集')
+		) ?>
 	</td>
 	<td style="white-space: nowrap">
 		<?php echo $this->BcTime->format('Y-m-d', $data['CallableEditorTemplateConfig']['created']) ?>

@@ -30,6 +30,12 @@
 					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' コンテンツ名'),
 					array('escape' => false, 'class' => 'btn-direction')) ?>
 			</th>
+			<th>
+				<?php echo $this->Paginator->sort('title', array(
+					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' タイトル',
+					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' タイトル'),
+					array('escape' => false, 'class' => 'btn-direction')) ?>
+			</th>
 			<th><?php echo $this->Paginator->sort('created', array(
 					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 登録日',
 					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' 登録日'),
@@ -49,7 +55,7 @@
 	<?php endforeach; ?>
 <?php else: ?>
 		<tr>
-			<td colspan="4"><p class="no-data">データが見つかりませんでした。</p></td>
+			<td colspan="5"><p class="no-data">データが見つかりませんでした。</p></td>
 		</tr>
 <?php endif; ?>
 	</tbody>

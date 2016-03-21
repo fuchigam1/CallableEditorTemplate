@@ -7,12 +7,10 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-if (ClassRegistry::isKeySet('EditorTemplate')) {
-	$EditorTemplateModel = ClassRegistry::getObject('EditorTemplate');
-} else {
-	$EditorTemplateModel = ClassRegistry::init('EditorTemplate');
+$labelName = Hash::get($callableEditorTemplateConfig, 'title');
+if (!$labelName) {
+	$labelName = Configure::read('CallableEditorTemplate.label_name');
 }
-$editorTemplateList = $EditorTemplateModel->find('list');
 ?>
 </table>
 <?php echo $this->BcForm->hidden('CallableEditorTemplate.id') ?>
@@ -21,7 +19,7 @@ $editorTemplateList = $EditorTemplateModel->find('list');
 <table cellpadding="0" cellspacing="0" class="form-table section" id="CallableEditorTemplateTable">
 	<tr>
 		<th>
-			<?php echo $this->BcForm->label('CallableEditorTemplate.editor_template_id', Configure::read('CallableEditorTemplate.label_name')) ?>
+			<?php echo $this->BcForm->label('CallableEditorTemplate.editor_template_id', $labelName) ?>
 		</th>
 		<td class="col-input">
 			<?php echo $this->BcForm->input('CallableEditorTemplate.editor_template_id', array(
