@@ -14,6 +14,8 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 *
 	 */
 	public $events = array(
+		'EditorTemplate.afterSave',
+		'EditorTemplate.afterDelete',		
 		'Page.beforeFind',
 		'Page.afterDelete',
 		'Page.afterSave',
@@ -36,6 +38,29 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * @var boolean
 	 */
 	private $throwBlogPost = false;
+
+	/**
+	 * editorTemplateAfterSave
+	 * 
+	 * @param CakeEvent $event
+	 */
+	public function editorTemplateAfterSave(CakeEvent $event)
+	{
+		clearAllCache();
+		return;
+	}
+
+	/**
+	 * editorTemplateAfterDelete
+	 * 
+	 * @param CakeEvent $event
+	 * @return boolean
+	 */
+	public function editorTemplateAfterDelete(CakeEvent $event)
+	{
+		clearAllCache();
+		return true;
+	}
 
 	/**
 	 * pageBeforeFind
