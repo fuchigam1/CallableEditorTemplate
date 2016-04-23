@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Model] CallableEditorTemplate
  *
@@ -9,6 +10,7 @@
  */
 class CallableEditorTemplateConfig extends BcPluginAppModel
 {
+
 	/**
 	 * ModelName
 	 * 
@@ -40,7 +42,7 @@ class CallableEditorTemplateConfig extends BcPluginAppModel
 		$data = array(
 			$this->name => array(
 				'status' => false,
-				'title' => Configure::read('CallableEditorTemplate.label_name'),
+				'title'	 => Configure::read('CallableEditorTemplate.label_name'),
 			),
 		);
 		return $data;

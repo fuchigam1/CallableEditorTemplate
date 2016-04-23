@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Config] CallableEditorTemplate
  *
@@ -11,15 +12,15 @@ App::uses('CallableEditorTemplateUtil', 'CallableEditorTemplate.Lib');
 /**
  * システムナビ
  */
-$config['BcApp.adminNavi.callable_editor_template'] = array(
-	'name'		=> 'コーラブルエディターテンプレート プラグイン',
-	'contents'	=> array(
-		array('name' => 'コーラブルエディターテンプレート設定一覧',
-			'url' => array(
-				'admin' => true,
-				'plugin' => 'callable_editor_template',
+$config['BcApp.adminNavi.callable_editor_template']	 = array(
+	'name'		 => 'コーラブルエディターテンプレート プラグイン',
+	'contents'	 => array(
+		array('name'	 => 'コーラブルエディターテンプレート設定一覧',
+			'url'	 => array(
+				'admin'		 => true,
+				'plugin'	 => 'callable_editor_template',
 				'controller' => 'callable_editor_template_configs',
-				'action' => 'index')
+				'action'	 => 'index')
 		)
 	)
 );
@@ -27,10 +28,10 @@ $config['BcApp.adminNavi.callable_editor_template'] = array(
  * モデル判定用設定
  * 
  */
-$config['CallableEditorTemplate'] = array(
+$config['CallableEditorTemplate']					 = array(
 	'label_name' => 'エディターテンプレート',
 	// フィールドタイプ種別
-	'target' => array(
+	'target'	 => array(
 //		設定用雛形
 //		'PLUGIN_NAME.MODEL_NAME' => array(
 //			モデル名の定義
@@ -50,34 +51,34 @@ $config['CallableEditorTemplate'] = array(
 //			'view_name' => 'VIEW_NAME',
 //			'model_data' => 'VARIAVLE_DATA_NAME',
 //		),
-		'Page' => array(
-			'name' => 'Page',
-			'title' => '固定ページ',
-			'fields' => array(
+		'Page'			 => array(
+			'name'		 => 'Page',
+			'title'		 => '固定ページ',
+			'fields'	 => array(
 				'Page.title' => 'ページタイトル',
-				),
-			'edit_url' => array(
-				'plugin' => null,
-				'controller' => 'pages',
-				'action' => 'edit',
-				'pass' => array('id'),
 			),
-			'view_name' => 'Page',
+			'edit_url'	 => array(
+				'plugin'	 => null,
+				'controller' => 'pages',
+				'action'	 => 'edit',
+				'pass'		 => array('id'),
+			),
+			'view_name'	 => 'Page',
 			'model_data' => 'data',
 		),
-		'Blog.BlogPost' => array(
-			'name' => 'BlogPost',
-			'title' => 'ブログ記事',
-			'fields' => array(
+		'Blog.BlogPost'	 => array(
+			'name'		 => 'BlogPost',
+			'title'		 => 'ブログ記事',
+			'fields'	 => array(
 				'BlogPost.name' => 'タイトル',
 			),
-			'edit_url' => array(
-				'plugin' => 'blog',
+			'edit_url'	 => array(
+				'plugin'	 => 'blog',
 				'controller' => 'blog_posts',
-				'action' => 'edit',
-				'pass' => array('blog_content_id', 'id'),
+				'action'	 => 'edit',
+				'pass'		 => array('blog_content_id', 'id'),
 			),
-			'view_name' => 'Blog',
+			'view_name'	 => 'Blog',
 			'model_data' => 'post',
 		),
 	),

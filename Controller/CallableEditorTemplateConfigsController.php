@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Controller] CallableEditorTemplateConfigs
  *
@@ -8,8 +9,10 @@
  * @license			MIT
  */
 App::uses('CallableEditorTemplateApp', 'CallableEditorTemplate.Controller');
+
 class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppController
 {
+
 	/**
 	 * ControllerName
 	 * 
@@ -57,8 +60,8 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	public function admin_index()
 	{
 		$this->pageTitle = $this->adminTitle . '一覧';
-		$this->search = 'callable_editor_template_configs_index';
-		$this->help = 'callable_editor_template_configs_index';
+		$this->search	 = 'callable_editor_template_configs_index';
+		$this->help		 = 'callable_editor_template_configs_index';
 		parent::admin_index();
 	}
 
@@ -89,7 +92,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 				$this->setMessage('入力エラーです。内容を修正して下さい。', true);
 			}
 		} else {
-			$this->request->data = $this->{$this->modelClass}->getDefaultValue();
+			$this->request->data							 = $this->{$this->modelClass}->getDefaultValue();
 			$this->request->data[$this->modelClass]['model'] = 'BlogContent';
 		}
 
@@ -129,11 +132,11 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 		if ($this->request->data) {
 			$count = 0;
 			if ($this->blogContentDatas) {
-				foreach ($this->blogContentDatas as $key => $blog) {	
+				foreach ($this->blogContentDatas as $key => $blog) {
 					$configData = $this->CallableEditorTemplateConfig->findByContentId($key);
 					if (!$configData) {
-						$this->request->data['CallableEditorTemplateConfig']['content_id'] = $key;
-						$this->request->data['CallableEditorTemplateConfig']['model'] = 'BlogContent';
+						$this->request->data['CallableEditorTemplateConfig']['content_id']	 = $key;
+						$this->request->data['CallableEditorTemplateConfig']['model']		 = 'BlogContent';
 						$this->CallableEditorTemplateConfig->create($this->request->data);
 						if (!$this->CallableEditorTemplateConfig->save($this->request->data, false)) {
 							$this->log(sprintf('ブログID：%s の登録に失敗しました。', $key));
@@ -160,8 +163,8 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 */
 	public function _createAdminIndexConditions($data)
 	{
-		$conditions = array();
-		$model = '';
+		$conditions	 = array();
+		$model		 = '';
 
 		if (isset($data[$this->modelClass]['model'])) {
 			$model = $data[$this->modelClass]['model'];
@@ -177,7 +180,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 		unset($data[$this->modelClass]['model']);
 
 		// 条件指定のないフィールドを解除
-		foreach($data[$this->modelClass] as $key => $value) {
+		foreach ($data[$this->modelClass] as $key => $value) {
 			if ($value === '') {
 				unset($data[$this->modelClass][$key]);
 			}
@@ -189,7 +192,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 
 		if ($model) {
 			$conditions['and'] = array(
-				$this->modelClass .'.model' => $model
+				$this->modelClass . '.model' => $model
 			);
 		}
 

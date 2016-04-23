@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Model] CallableEditorTemplate
  *
@@ -9,6 +10,7 @@
  */
 class CallableEditorTemplate extends BcPluginAppModel
 {
+
 	/**
 	 * ModelName
 	 * 
@@ -37,7 +39,7 @@ class CallableEditorTemplate extends BcPluginAppModel
 	 */
 	public $belongsTo = array(
 		'EditorTemplate' => array(
-			'className'	=> 'EditorTemplate',
+			'className'	 => 'EditorTemplate',
 			'foreignKey' => 'editor_template_id',
 		)
 	);
@@ -54,7 +56,8 @@ class CallableEditorTemplate extends BcPluginAppModel
 	 *
 	 * @return array
 	 */
-	public function getDefaultValue() {
+	public function getDefaultValue()
+	{
 		$data = array(
 			$this->name => array(
 				'status' => true,

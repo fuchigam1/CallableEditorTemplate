@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [ViewEventListener] CallableEditorTemplate
  *
@@ -9,6 +10,7 @@
  */
 class CallableEditorTemplateViewEventListener extends BcViewEventListener
 {
+
 	/**
 	 * 登録イベント
 	 *
@@ -98,11 +100,11 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 			$this->setUpModel();
 			$data = $this->CallableEditorTemplateConfigModel->find('first', array(
 				'conditions' => array(
-					'CallableEditorTemplateConfig.model' => 'Page',
-					'CallableEditorTemplateConfig.content_id' => 0,
+					'CallableEditorTemplateConfig.model'		 => 'Page',
+					'CallableEditorTemplateConfig.content_id'	 => 0,
 				),
-				'recursive' => -1,
-				'callbacks' => false,
+				'recursive'	 => -1,
+				'callbacks'	 => false,
 			));
 			if ($data) {
 				$View->set('callableEditorTemplateConfig', $data['CallableEditorTemplateConfig']);
@@ -128,11 +130,11 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 			$this->setUpModel();
 			$data = $this->CallableEditorTemplateConfigModel->find('first', array(
 				'conditions' => array(
-					'CallableEditorTemplateConfig.model' => 'BlogContent',
-					'CallableEditorTemplateConfig.content_id' => $View->viewVars['blogContent']['BlogContent']['id'],
+					'CallableEditorTemplateConfig.model'		 => 'BlogContent',
+					'CallableEditorTemplateConfig.content_id'	 => $View->viewVars['blogContent']['BlogContent']['id'],
 				),
-				'recursive' => -1,
-				'callbacks' => false,
+				'recursive'	 => -1,
+				'callbacks'	 => false,
 			));
 			if ($data) {
 				$View->set('callableEditorTemplateConfig', $data['CallableEditorTemplateConfig']);
@@ -176,21 +178,21 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		}
 
 		$this->pluginSetting = Configure::read('CallableEditorTemplate.target');
-		$modelName = '';
-		$modelId = '';
+		$modelName			 = '';
+		$modelId			 = '';
 
 		if ($View->BcBaser->isPage()) {
-			$modelName = 'Page';
-			$modelId = Hash::get($View->request->data, 'Page.id');
+			$modelName	 = 'Page';
+			$modelId	 = Hash::get($View->request->data, 'Page.id');
 
 			$this->setUpModel();
 			$configData = $this->CallableEditorTemplateConfigModel->find('first', array(
 				'conditions' => array(
-					'CallableEditorTemplateConfig.model' => 'Page',
-					'CallableEditorTemplateConfig.content_id' => 0,
+					'CallableEditorTemplateConfig.model'		 => 'Page',
+					'CallableEditorTemplateConfig.content_id'	 => 0,
 				),
-				'recursive' => -1,
-				'callbacks' => false,
+				'recursive'	 => -1,
+				'callbacks'	 => false,
 			));
 			if (!$configData) {
 				return;
@@ -207,19 +209,19 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 			if (!empty($View->plugin)) {
 				$setting = CallableEditorTemplateUtil::getThisPluginSetting($this->pluginSetting, $View->plugin);
 				if ($View->name === $setting['view_name']) {
-					$modelName = $setting['name'];
-					$targetData = $View->viewVars[$setting['model_data']];
-					$modelId = $targetData[$modelName]['id'];
+					$modelName	 = $setting['name'];
+					$targetData	 = $View->viewVars[$setting['model_data']];
+					$modelId	 = $targetData[$modelName]['id'];
 
 					// TODO: 設定ファイルから汎用的に設定データを取得できるようにする
 					$this->setUpModel();
 					$configData = $this->CallableEditorTemplateConfigModel->find('first', array(
 						'conditions' => array(
-							'CallableEditorTemplateConfig.model' => 'BlogContent',
-							'CallableEditorTemplateConfig.content_id' => $targetData[$modelName]['blog_content_id'],
+							'CallableEditorTemplateConfig.model'		 => 'BlogContent',
+							'CallableEditorTemplateConfig.content_id'	 => $targetData[$modelName]['blog_content_id'],
 						),
-						'recursive' => -1,
-						'callbacks' => false,
+						'recursive'	 => -1,
+						'callbacks'	 => false,
 					));
 					if (!$configData) {
 						return;
@@ -239,14 +241,13 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		}
 
 		$this->modelInitializer();
-		$data = $this->CallableEditorTemplate->find('first', array(
+		$data								 = $this->CallableEditorTemplate->find('first', array(
 			'conditions' => array(
-				'CallableEditorTemplate.model' => $modelName,
-				'CallableEditorTemplate.model_id' => $modelId,
-			),
-			'callbacks' => false,
+				'CallableEditorTemplate.model'		 => $modelName,
+				'CallableEditorTemplate.model_id'	 => $modelId,),
+			'callbacks'	 => false,
 		));
-		$this->callableEditorTemplateData = $data;
+		$this->callableEditorTemplateData	 = $data;
 
 		if (!$this->callableEditorTemplateData) {
 			return;

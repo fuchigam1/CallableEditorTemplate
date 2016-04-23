@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Controller] CallableEditorTemplate 基底コントローラ
  *
@@ -9,6 +10,7 @@
  */
 class CallableEditorTemplateAppController extends BcPluginAppController
 {
+
 	/**
 	 * Component
 	 * 
@@ -55,8 +57,8 @@ class CallableEditorTemplateAppController extends BcPluginAppController
 		parent::beforeFilter();
 
 		// ブログ情報を取得
-		$BlogContentModel = ClassRegistry::init('Blog.BlogContent');
-		$this->blogContentDatas = $BlogContentModel->find('list', array('recursive' => -1));
+		$BlogContentModel		 = ClassRegistry::init('Blog.BlogContent');
+		$this->blogContentDatas	 = $BlogContentModel->find('list', array('recursive' => -1));
 	}
 
 	/**
@@ -66,22 +68,22 @@ class CallableEditorTemplateAppController extends BcPluginAppController
 	public function admin_index()
 	{
 		$default = array('named' => array(
-			'num' => $this->siteConfigs['admin_list_num'],
-			'sortmode' => 0)
+				'num'		 => $this->siteConfigs['admin_list_num'],
+				'sortmode'	 => 0)
 		);
 		$this->setViewConditions($this->modelClass, array('default' => $default));
-		
-		$conditions = $this->_createAdminIndexConditions($this->request->data);
-		$this->paginate = array(
-			'conditions'	=> $conditions,
-			'fields'		=> array(),
+
+		$conditions		 = $this->_createAdminIndexConditions($this->request->data);
+		$this->paginate	 = array(
+			'conditions' => $conditions,
+			'fields'	 => array(),
 			//'order'	=> '{$this->modelClass}.id DESC',
-			'limit'			=> $this->passedArgs['num']
+			'limit'		 => $this->passedArgs['num']
 		);
 		$this->set('datas', $this->paginate($this->modelClass));
 		$this->set('blogContentDatas', array('0' => '固定ページ') + $this->blogContentDatas);
-		
-		if($this->RequestHandler->isAjax() || !empty($this->request->query['ajax'])) {
+
+		if ($this->RequestHandler->isAjax() || !empty($this->request->query['ajax'])) {
 			Configure::write('debug', 0);
 			$this->render('ajax_index');
 			return;
@@ -97,15 +99,15 @@ class CallableEditorTemplateAppController extends BcPluginAppController
 	{
 		if (!$id) {
 			$this->setMessage('無効な処理です。', true);
-			$this->redirect(array('action' => 'index'));			
+			$this->redirect(array('action' => 'index'));
 		}
 		if (empty($this->request->data)) {
-			$this->{$this->modelClass}->id = $id;
-			$this->request->data = $this->{$this->modelClass}->read();
+			$this->{$this->modelClass}->id	 = $id;
+			$this->request->data			 = $this->{$this->modelClass}->read();
 		} else {
 			$this->{$this->modelClass}->set($this->request->data);
 			if ($this->{$this->modelClass}->save($this->request->data)) {
-				$this->setMessage($this->name .' ID:'. $id .' を更新しました。', false, true);
+				$this->setMessage($this->name . ' ID:' . $id . ' を更新しました。', false, true);
 				clearAllCache();
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -151,7 +153,7 @@ class CallableEditorTemplateAppController extends BcPluginAppController
 			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->{$this->modelClass}->delete($id)) {
-			$message = $this->name .' ID:'. $id .'を削除しました。';
+			$message = $this->name . ' ID:' . $id . 'を削除しました。';
 			$this->setMessage($message, false, true);
 			clearAllCache();
 			$this->redirect(array('action' => 'index'));
@@ -191,7 +193,7 @@ class CallableEditorTemplateAppController extends BcPluginAppController
 		$data = $this->{$this->modelClass}->read(null, $id);
 		// 削除実行
 		if ($this->{$this->modelClass}->delete($id)) {
-			$this->{$this->modelClass}->saveDbLog($this->name .' ID:'. $data[$this->modelClass]['id'] .' を削除しました。');
+			$this->{$this->modelClass}->saveDbLog($this->name . ' ID:' . $data[$this->modelClass]['id'] . ' を削除しました。');
 			return true;
 		} else {
 			return false;
@@ -283,11 +285,12 @@ class CallableEditorTemplateAppController extends BcPluginAppController
 	 */
 	protected function _changeStatus($id, $status)
 	{
-		$data = $this->{$this->modelClass}->find('first', array(
+		$data								 = $this->{$this->modelClass}->find('first', array(
 			'conditions' => array('id' => $id),
-			'recursive' => -1
-		));
-		$data[$this->modelClass]['status'] = $status;
+			'recursive'	 => -1
+				)
+		);
+		$data[$this->modelClass]['status']	 = $status;
 		if ($status) {
 			$data[$this->modelClass]['status'] = true;
 		} else {
