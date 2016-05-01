@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Helper] CallableEditorTemplate
  *
@@ -9,15 +10,16 @@
  */
 class CallableEditorTemplateHelper extends AppHelper
 {
+
 	/**
 	 * モデル名とコンテンツ名の対応表
 	 * 
 	 * @var array
 	 */
 	public $types = array(
-		0 => '指定しない',
-		'Page' => '固定ページ',
-		'BlogContent' => 'ブログ',
+		0				 => '指定しない',
+		'Page'			 => '固定ページ',
+		'BlogContent'	 => 'ブログ',
 	);
 
 	/**
@@ -28,12 +30,12 @@ class CallableEditorTemplateHelper extends AppHelper
 	 */
 	public function allowPublish($data)
 	{
-		if (isset($data['CallableEditorTemplate'])){
+		if (isset($data['CallableEditorTemplate'])) {
 			$data = $data['CallableEditorTemplate'];
 		} elseif (isset($data['CallableEditorTemplateConfig'])) {
 			$data = $data['CallableEditorTemplateConfig'];
 		}
-		$allowPublish = (int)$data['status'];
+		$allowPublish = (int) $data['status'];
 		return $allowPublish;
 	}
 
