@@ -22,52 +22,25 @@ if (count($blogContentDatas) > 0) {
 	<?php echo $this->BcForm->input('CallableEditorTemplateConfig.model', array('type' => 'hidden')) ?>
 <?php endif ?>
 
-<?php if ($this->request->params['action'] != 'admin_add'): ?>
-	<h2>
-		<?php if ($this->request->data['CallableEditorTemplateConfig']['model'] == 'Page'): ?>
-			<?php
-			$this->BcBaser->link('≫記事一覧こちら', array(
-				'admin'		 => true, 'plugin'	 => null, 'controller' => 'pages',
-				'action'	 => 'index'
-			))
-			?>
-		<?php endif ?>
-		<?php if ($this->request->data['CallableEditorTemplateConfig']['model'] == 'BlogContent'): ?>
-			<?php
-			$this->BcBaser->link($blogContentDatas[$this->request->data['CallableEditorTemplateConfig']['content_id']] . ' ブログ設定編集はこちら', array(
-				'admin'		 => true, 'plugin'	 => 'blog', 'controller' => 'blog_contents',
-				'action'	 => 'edit', $this->request->data['CallableEditorTemplateConfig']['content_id']
-			))
-			?>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<?php
-			$this->BcBaser->link('≫記事一覧こちら', array(
-				'admin'		 => true, 'plugin'	 => 'blog', 'controller' => 'blog_posts',
-				'action'	 => 'index', $this->request->data['CallableEditorTemplateConfig']['content_id']
-			))
-			?>
-			<?php endif ?>
-	</h2>
-<?php endif ?>
-
 <div id="CallableEditorTemplateConfigConfigTable">
+	<h2>設定項目</h2>
 	<table cellpadding="0" cellspacing="0" class="form-table section">
 		<?php if ($this->request->params['action'] != 'admin_add'): ?>
 			<tr>
 				<th class="col-head"><?php echo $this->BcForm->label('CallableEditorTemplateConfig.id', 'NO') ?></th>
 				<td class="col-input">
-			<?php echo $this->BcForm->value('CallableEditorTemplateConfig.id') ?>
+					<?php echo $this->BcForm->value('CallableEditorTemplateConfig.id') ?>
 				</td>
 			</tr>
-				<?php endif ?>
+		<?php endif ?>
 
-				<?php if ($this->request->params['action'] == 'admin_add'): ?>
-	<?php if ($hasAddableBlog): ?>
+		<?php if ($this->request->params['action'] == 'admin_add'): ?>
+			<?php if ($hasAddableBlog): ?>
 				<tr>
 					<th class="col-head"><?php echo $this->BcForm->label('CallableEditorTemplateConfig.content_id', 'ブログ') ?></th>
 					<td class="col-input">
-		<?php echo $this->BcForm->input('CallableEditorTemplateConfig.content_id', array('type' => 'select', 'options' => $blogContentDatas)) ?>
-		<?php echo $this->BcForm->error('CallableEditorTemplateConfig.content_id') ?>
+						<?php echo $this->BcForm->input('CallableEditorTemplateConfig.content_id', array('type' => 'select', 'options' => $blogContentDatas)) ?>
+						<?php echo $this->BcForm->error('CallableEditorTemplateConfig.content_id') ?>
 					</td>
 				</tr>
 			<?php else: ?>
@@ -77,13 +50,13 @@ if (count($blogContentDatas) > 0) {
 						追加設定可能なブログがありません。
 					</td>
 				</tr>
-					<?php endif ?>
-<?php endif ?>
-<?php if ($hasAddableBlog): ?>
+			<?php endif ?>
+		<?php endif ?>
+		<?php if ($hasAddableBlog): ?>
 			<tr>
 				<th class="col-head">
-	<?php echo $this->BcForm->label('CallableEditorTemplateConfig.status', '利用状態') ?>
-	<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigStatus', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
+					<?php echo $this->BcForm->label('CallableEditorTemplateConfig.status', '利用状態') ?>
+					<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigStatus', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
 					<div id="helptextCallableEditorTemplateConfigStatus" class="helptext">
 						<ul>
 							<li>記事別エディターテンプレート呼出利用の有無を指定します。</li>
@@ -97,8 +70,8 @@ if (count($blogContentDatas) > 0) {
 			</tr>
 			<tr>
 				<th class="col-head">
-	<?php echo $this->BcForm->label('CallableEditorTemplateConfig.title', 'タイトル') ?>
-	<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigTitle', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
+					<?php echo $this->BcForm->label('CallableEditorTemplateConfig.title', 'タイトル') ?>
+					<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigTitle', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
 					<div id="helptextCallableEditorTemplateConfigTitle" class="helptext">
 						<ul>
 							<li>記事編集画面に表示する見出しを指定できます。</li>
@@ -106,17 +79,17 @@ if (count($blogContentDatas) > 0) {
 					</div>
 				</th>
 				<td class="col-input">
-	<?php echo $this->BcForm->input('CallableEditorTemplateConfig.title', array('type' => 'text', 'maxlength' => 255, 'class' => 'full-width', 'counter' => true, 'placeholder' => Configure::read('CallableEditorTemplate.label_name'))) ?>
-	<?php echo $this->BcForm->error('CallableEditorTemplateConfig.title') ?>
+					<?php echo $this->BcForm->input('CallableEditorTemplateConfig.title', array('type' => 'text', 'maxlength' => 255, 'class' => 'full-width', 'counter' => true, 'placeholder' => Configure::read('CallableEditorTemplate.label_name'))) ?>
+					<?php echo $this->BcForm->error('CallableEditorTemplateConfig.title') ?>
 				</td>
 			</tr>
-	<?php endif ?>
+		<?php endif ?>
 	</table>
 </div>
 
 <?php if ($hasAddableBlog): ?>
 	<div class="submit">
-	<?php echo $this->BcForm->submit('保　存', array('div' => false, 'class' => 'btn-red button')) ?>
+		<?php echo $this->BcForm->submit('保　存', array('div' => false, 'class' => 'btn-red button')) ?>
 	</div>
 <?php endif ?>
 <?php echo $this->BcForm->end() ?>
