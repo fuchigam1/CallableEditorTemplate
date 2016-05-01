@@ -28,7 +28,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	);
 
 	/**
-	 * コーラブルエディターテンプレートモデル
+	 * 記事別エディターテンプレート呼出モデル
 	 * 
 	 * @var Object
 	 */
@@ -106,7 +106,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 
 	/**
 	 * pageAfterDelete
-	 * - 固定ページ削除時、そのコンテンツが持つコーラブルエディターテンプレート情報を削除する
+	 * - 固定ページ削除時、そのコンテンツが持つ記事別エディターテンプレート呼出情報を削除する
 	 * 
 	 * @param CakeEvent $event
 	 */
@@ -120,7 +120,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 		)));
 		if ($data) {
 			if (!$CallableEditorTemplateModel->delete($data['CallableEditorTemplate']['id'])) {
-				$this->log('ID:' . $data['CallableEditorTemplate']['id'] . 'のコーラブルエディターテンプレートの削除に失敗しました。');
+				$this->log('ID:' . $data['CallableEditorTemplate']['id'] . 'の記事別エディターテンプレート呼出の削除に失敗しました。');
 			}
 		}
 		return true;
@@ -128,7 +128,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 
 	/**
 	 * blogBlogPostAfterDelete
-	 * - ブログ記事削除時、そのコンテンツが持つコーラブルエディターテンプレート情報を削除する
+	 * - ブログ記事削除時、そのコンテンツが持つ記事別エディターテンプレート呼出情報を削除する
 	 * 
 	 * @param CakeEvent $event
 	 */
@@ -142,7 +142,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 		)));
 		if ($data) {
 			if (!$CallableEditorTemplateModel->delete($data['CallableEditorTemplate']['id'])) {
-				$this->log('ID:' . $data['CallableEditorTemplate']['id'] . 'のコーラブルエディターテンプレートの削除に失敗しました。');
+				$this->log('ID:' . $data['CallableEditorTemplate']['id'] . 'の記事別エディターテンプレート呼出の削除に失敗しました。');
 			}
 		}
 		return true;
@@ -156,7 +156,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	public function blogBlogContentAfterDelete(CakeEvent $event)
 	{
 		$Model								 = $event->subject();
-		// ブログ設定削除時、そのコンテンツが持つコーラブルエディターテンプレート設定情報を削除する
+		// ブログ設定削除時、そのコンテンツが持つ記事別エディターテンプレート呼出設定情報を削除する
 		$CallableEditorTemplateConfigModel	 = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplateConfig');
 		$data								 = $CallableEditorTemplateConfigModel->find('first', array('conditions' => array(
 				'CallableEditorTemplateConfig.model'		 => $Model->alias,
@@ -164,7 +164,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 		)));
 		if ($data) {
 			if (!$CallableEditorTemplateConfigModel->delete($data['CallableEditorTemplateConfig']['id'])) {
-				$this->log('ID:' . $data['CallableEditorTemplateConfig']['id'] . 'のコーラブルエディターテンプレート設定の削除に失敗しました。');
+				$this->log('ID:' . $data['CallableEditorTemplateConfig']['id'] . 'の記事別エディターテンプレート呼出設定の削除に失敗しました。');
 			}
 		}
 		return true;
@@ -185,7 +185,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 
 		$saveData = $this->generateSaveData($Model, $Model->id);
 		if (!$this->CallableEditorTemplateModel->save($saveData)) {
-			$this->log(sprintf('ID：%s のコーラブルエディターテンプレートの保存に失敗しました。', $Model->data['CallableEditorTemplate']['id']));
+			$this->log(sprintf('ID：%s の記事別エディターテンプレート呼出の保存に失敗しました。', $Model->data['CallableEditorTemplate']['id']));
 		}
 	}
 
@@ -206,7 +206,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 		// 2周目では保存処理に渡らないようにしている
 		if (!$this->throwBlogPost) {
 			if (!$this->CallableEditorTemplateModel->save($saveData)) {
-				$this->log(sprintf('ID：%s のコーラブルエディターテンプレートの保存に失敗しました。', $Model->data['CallableEditorTemplate']['id']));
+				$this->log(sprintf('ID：%s の記事別エディターテンプレート呼出の保存に失敗しました。', $Model->data['CallableEditorTemplate']['id']));
 			}
 		}
 		// ブログ記事コピー保存時、アイキャッチが入っていると処理が2重に行われるため、1周目で処理通過を判定し、
@@ -275,7 +275,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 						),
 						'recursive'	 => -1
 					));
-					// XXX もしコーラブルエディターテンプレート設定の初期データ作成を行ってない事を考慮して判定している
+					// XXX もし記事別エディターテンプレート呼出設定の初期データ作成を行ってない事を考慮して判定している
 					if ($_data) {
 						// コピー元データがある時
 						$data['CallableEditorTemplate']				 = $_data['CallableEditorTemplate'];

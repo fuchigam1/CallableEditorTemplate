@@ -86,7 +86,7 @@ if (count($blogContentDatas) > 0) {
 	<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigStatus', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
 					<div id="helptextCallableEditorTemplateConfigStatus" class="helptext">
 						<ul>
-							<li>コーラブルエディターテンプレート利用の有無を指定します。</li>
+							<li>記事別エディターテンプレート呼出利用の有無を指定します。</li>
 						</ul>
 					</div>
 				</th>

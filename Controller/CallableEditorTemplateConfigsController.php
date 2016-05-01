@@ -34,7 +34,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 */
 	public $crumbs = array(
 		array('name' => 'プラグイン管理', 'url' => array('plugin' => '', 'controller' => 'plugins', 'action' => 'index')),
-		array('name' => 'コーラブルエディターテンプレート設定管理', 'url' => array('plugin' => 'callable_editor_template', 'controller' => 'callable_editor_template_configs', 'action' => 'index'))
+		array('name' => '記事別エディターテンプレート呼出設定管理', 'url' => array('plugin' => 'callable_editor_template', 'controller' => 'callable_editor_template_configs', 'action' => 'index'))
 	);
 
 	/**
@@ -42,7 +42,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 *
 	 * @var string
 	 */
-	public $adminTitle = 'コーラブルエディターテンプレート設定';
+	public $adminTitle = '記事別エディターテンプレート呼出設定';
 
 	/**
 	 * beforeFilter
@@ -123,8 +123,8 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	}
 
 	/**
-	 * [ADMIN] 各ブログ別のコーラブルエディターテンプレート設定データを作成する
-	 *   ・コーラブルエディターテンプレート設定データがないブログ用のデータのみ作成する
+	 * [ADMIN] 各ブログ別の記事別エディターテンプレート呼出設定データを作成する
+	 *   ・記事別エディターテンプレート呼出設定データがないブログ用のデータのみ作成する
 	 * 
 	 */
 	public function admin_first()
@@ -147,7 +147,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 				}
 			}
 
-			$message = sprintf('%s 件のコーラブルエディターテンプレート設定を登録しました。', $count);
+			$message = sprintf('%s 件の記事別エディターテンプレート呼出設定を登録しました。', $count);
 			$this->setMessage($message, false, true);
 			$this->redirect(array('controller' => 'callable_editor_template_configs', 'action' => 'index'));
 		}

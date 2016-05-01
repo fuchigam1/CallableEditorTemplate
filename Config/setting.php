@@ -13,9 +13,9 @@ App::uses('CallableEditorTemplateUtil', 'CallableEditorTemplate.Lib');
  * システムナビ
  */
 $config['BcApp.adminNavi.callable_editor_template']	 = array(
-	'name'		 => 'コーラブルエディターテンプレート プラグイン',
+	'name'		 => '記事別エディターテンプレート呼出 プラグイン',
 	'contents'	 => array(
-		array('name'	 => 'コーラブルエディターテンプレート設定一覧',
+		array('name'	 => '記事別エディターテンプレート呼出設定一覧',
 			'url'	 => array(
 				'admin'		 => true,
 				'plugin'	 => 'callable_editor_template',
