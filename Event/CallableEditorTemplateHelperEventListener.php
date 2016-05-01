@@ -63,6 +63,17 @@ class CallableEditorTemplateHelperEventListener extends BcHelperEventListener
 			return;
 		}
 
+		if ($View->request->params['action'] === 'admin_add') {
+			// 記事追加時、エディターテンプレート呼出欄にデフォルト値を設定する
+			$View->request->data['CallableEditorTemplate'] = array('display_before' => false);
+		}
+		if ($View->request->params['action'] === 'admin_edit') {
+			// 記事編集時、記事がエディターテンプレート呼出を持っていない場合、エディターテンプレート呼出欄にデフォルト値を設定する
+			if (!Hash::get($View->request->data, 'CallableEditorTemplate.id')) {
+				$View->request->data['CallableEditorTemplate'] = array('display_before' => false);
+			}
+		}
+
 		// ブログ記事：エディターテンプレート呼出欄を表示する
 		echo $View->element('CallableEditorTemplate.callable_editor_template_form');
 	}

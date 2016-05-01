@@ -60,7 +60,7 @@ class CallableEditorTemplate extends BcPluginAppModel
 	{
 		$data = array(
 			$this->name => array(
-				'status' => true,
+				'display_before' => false,
 			)
 		);
 		return $data;
