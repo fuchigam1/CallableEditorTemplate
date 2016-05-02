@@ -10,6 +10,12 @@
  */
 App::uses('CallableEditorTemplateUtil', 'CallableEditorTemplate.Lib');
 /**
+ * Test実行時に有効化する
+ */
+//Configure::write('BcApp.corePlugins',
+//	Hash::merge(Configure::read('BcApp.corePlugins'), array('CallableEditorTemplate')
+//));
+/**
  * システムナビ
  */
 $config['BcApp.adminNavi.callable_editor_template']	 = array(

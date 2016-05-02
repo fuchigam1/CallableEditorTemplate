@@ -49,6 +49,16 @@ class CallableEditorTemplate extends BcPluginAppModel
 	 *
 	 */
 	public $validate = array(
+		'model' => array(
+			'notEmpty'	 => array(
+				'rule'		 => array('notEmpty'),
+				'message'	 => 'モデル名を入力してください。',
+			),
+			'maxLength'	 => array(
+				'rule'		 => array('maxLength', 255),
+				'message'	 => 'モデル名は255文字以内で入力してください。',
+			),
+		),
 	);
 
 	/**
