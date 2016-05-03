@@ -10,9 +10,11 @@
  */
 App::uses('CallableEditorTemplateUtil', 'CallableEditorTemplate.Lib');
 /**
- * Test実行時に有効化する
+ * debugモードが有効の場合にTest実行を有効化する
  */
-Configure::write('BcApp.corePlugins', Hash::merge(Configure::read('BcApp.corePlugins'), array('CallableEditorTemplate')));
+if (Configure::read('debug') > 0) {
+	Configure::write('BcApp.corePlugins', Hash::merge(Configure::read('BcApp.corePlugins'), array('CallableEditorTemplate')));
+}
 /**
  * システムナビ
  */
