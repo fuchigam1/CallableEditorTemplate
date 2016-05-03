@@ -24,7 +24,7 @@ class CallableEditorTemplateConfigTest extends BaserTestCase
 
 	public function setUp()
 	{
-		$this->CallableEditorTemplateConfig = ClassRegistry::init('CallableEditorTemplateConfig');
+		$this->CallableEditorTemplateConfig = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplateConfig');
 		parent::setUp();
 	}
 
