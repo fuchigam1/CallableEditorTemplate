@@ -26,9 +26,12 @@ if (!$labelName) {
 				'type' => 'select', 'options' => $editorTemplateList, 'empty' => '表示しない',
 			)) ?>
 			<?php echo $this->BcForm->error('CallableEditorTemplate.editor_template_id') ?>
+
+			<?php if (Hash::get($callableEditorTemplateConfig, 'auto_display')): ?>
 			<span style="white-space: nowrap;">
 			<?php echo $this->BcForm->input('CallableEditorTemplate.display_before', array('type' => 'radio', 'options' => array(0 => 'コンテンツ下部に表示する', 1 => 'コンテンツ上部に表示する'))) ?>
 			<?php echo $this->BcForm->error('CallableEditorTemplate.display_before') ?>
 			</span>
+			<?php endif ?>
 		</td>
 	</tr>
