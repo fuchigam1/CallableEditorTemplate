@@ -208,6 +208,10 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 
 			if (!empty($View->plugin)) {
 				$setting = CallableEditorTemplateUtil::getThisPluginSetting($this->pluginSetting, $View->plugin);
+				if (!$setting) {
+					return;
+				}
+
 				if ($View->name === $setting['view_name']) {
 					$modelName	 = $setting['name'];
 					$targetData	 = $View->viewVars[$setting['model_data']];
