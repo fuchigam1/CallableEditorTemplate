@@ -12,6 +12,27 @@
 4. 有効化した固定ページ編集画面 or ブログ記事編集画面にアクセスすると、入力項目にエディターテンプレート設定欄が追加されてます。
 
 
+## Uses
+
+### 自動表示が有効の場合
+
+フロント側では、記事編集画面内のエディターテンプレート設定欄で選択したエディタテンプレートが表示されます。
+
+### 自動表示が無効の場合
+
+記事詳細画面の任意の場所に、以下のコードを利用すること表示できます。
+
+```
+<?php // ブログ記事詳細テンプレートの場合 ?>
+<?php echo $this->CallableEditorTemplate->getEditorTemplate($post); ?>
+```
+
+```
+<?php // 固定ページの場合 ?>
+<?php echo $this->CallableEditorTemplate->getEditorTemplate($this->request->data); ?>
+```
+
+
 ## Bug reports, Discuss, Support
 
 - Join online chat at [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/materializing/CallableEditorTemplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
