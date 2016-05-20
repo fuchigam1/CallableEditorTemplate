@@ -69,4 +69,46 @@ class CallableEditorTemplateHelper extends AppHelper
 		return;
 	}
 
+	/**
+	 * エディターテンプレートの利用可否を判定する
+	 * 
+	 * @param array $data
+	 * @return boolean
+	 */
+	public function isShowable($data)
+	{
+		if (Hash::get($data, 'CallableEditorTemplate.status')) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * エディターテンプレートのデータを取得する
+	 * 
+	 * @param array $data
+	 * @return string
+	 */
+	public function getEditorTemplate($data)
+	{
+		$html = '';
+		if (!$this->isShowable($data)) {
+			return $html;
+		}
+
+		if (ClassRegistry::isKeySet('EditorTemplate')) {
+			$EditorTemplateModel = ClassRegistry::getObject('EditorTemplate');
+		} else {
+			$EditorTemplateModel = ClassRegistry::init('EditorTemplate');
+		}
+		$editorTemplate = $EditorTemplateModel->find('first', array(
+			'conditions' => array('EditorTemplate.id' => Hash::get($data, 'CallableEditorTemplate.editor_template_id')),
+		));
+		if ($editorTemplate) {
+			$html = Hash::get($editorTemplate, 'EditorTemplate.html');
+		}
+
+		return $html;
+	}
+
 }
