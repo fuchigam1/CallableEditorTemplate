@@ -70,6 +70,21 @@ if (count($blogContentDatas) > 0) {
 			</tr>
 			<tr>
 				<th class="col-head">
+					<?php echo $this->BcForm->label('CallableEditorTemplateConfig.auto_display', '自動表示') ?>
+					<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigAutoDisplay', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
+					<div id="helptextCallableEditorTemplateConfigAutoDisplay" class="helptext">
+						<ul>
+							<li>エディターテンプレートの自動表示利用の有無を指定します。</li>
+						</ul>
+					</div>
+				</th>
+				<td class="col-input">
+					<?php echo $this->BcForm->input('CallableEditorTemplateConfig.auto_display', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('自動表示'))) ?>
+					<?php echo $this->BcForm->error('CallableEditorTemplateConfig.auto_display') ?>
+				</td>
+			</tr>
+			<tr>
+				<th class="col-head">
 					<?php echo $this->BcForm->label('CallableEditorTemplateConfig.title', 'タイトル') ?>
 					<?php echo $this->BcBaser->img('admin/icn_help.png', array('id' => 'helpCallableEditorTemplateConfigTitle', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
 					<div id="helptextCallableEditorTemplateConfigTitle" class="helptext">

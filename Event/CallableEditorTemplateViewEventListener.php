@@ -38,6 +38,13 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	private $CallableEditorTemplate = null;
 
 	/**
+	 * CallableEditorTemplateConfigデータ
+	 * 
+	 * @var array
+	 */
+	private $callableEditorTemplateConfigData = array();
+
+	/**
 	 * CallableEditorTemplateデータ
 	 * 
 	 * @var array
@@ -257,6 +264,11 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 			return;
 		}
 
+		$this->callableEditorTemplateConfigData = $configData;
+		if (!Hash::get($this->callableEditorTemplateConfigData, 'CallableEditorTemplate.auto_display')) {
+			return;
+		}
+
 		if (Hash::get($this->callableEditorTemplateData, 'CallableEditorTemplate.display_before')) {
 			$this->displayCallableEditorTemplate($View, $this->callableEditorTemplateData);
 		}
@@ -279,6 +291,10 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		$this->currentEventName = $event->name();
 
 		if (!$this->callableEditorTemplateData) {
+			return;
+		}
+
+		if (!Hash::get($this->callableEditorTemplateConfigData, 'CallableEditorTemplate.auto_display')) {
 			return;
 		}
 

@@ -53,6 +53,9 @@ $class=' class="'.implode(' ', $classies).'"';
 			array('title' => '編集')
 		) ?>
 	</td>
+	<td>
+		<?php echo $this->BcText->arrayValue($data['CallableEditorTemplateConfig']['auto_display'], $this->BcText->booleanMarkList()) ?>
+	</td>
 	<td style="white-space: nowrap">
 		<?php echo $this->BcTime->format('Y-m-d', $data['CallableEditorTemplateConfig']['created']) ?>
 		<br />
