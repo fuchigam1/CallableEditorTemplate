@@ -255,7 +255,8 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		$data								 = $this->CallableEditorTemplate->find('first', array(
 			'conditions' => array(
 				'CallableEditorTemplate.model'		 => $modelName,
-				'CallableEditorTemplate.model_id'	 => $modelId,),
+				'CallableEditorTemplate.model_id'	 => $modelId,
+			),
 			'callbacks'	 => false,
 		));
 		$this->callableEditorTemplateData	 = $data;
@@ -314,12 +315,11 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 		if (!Hash::get($data, 'EditorTemplate.id')) {
 			return;
 		}
-		if (!Hash::get($data, 'CallableEditorTemplate.status')) {
-			return;
-		}
 
-		$View->request->data['CallableEditorTemplateData'] = $data;
-		echo $View->element('CallableEditorTemplate.callable_editor_template');
+		if (Hash::get($data, 'CallableEditorTemplate.status')) {
+			$View->request->data['CallableEditorTemplateData'] = $data;
+			echo $View->element('CallableEditorTemplate.callable_editor_template');
+		}
 
 //		if (strpos($this->currentEventName, '.contentHeader') !== false) {
 //		}
