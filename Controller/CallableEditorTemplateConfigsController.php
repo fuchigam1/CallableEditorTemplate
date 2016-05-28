@@ -156,6 +156,29 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	}
 
 	/**
+	 * エディターテンプレートのプレビュー用呼出し
+	 * 
+	 */
+	public function admin_ajax_preview_template()
+	{
+		$id = $this->request->data['id'];
+
+		if (ClassRegistry::isKeySet('EditorTemplate')) {
+			$EditorTemplateModel = ClassRegistry::getObject('EditorTemplate');
+		} else {
+			$EditorTemplateModel = ClassRegistry::init('EditorTemplate');
+		}
+		$data = $EditorTemplateModel->find('first', array(
+			'conditions' => array(
+				'EditorTemplate.id' => $id,
+			),
+			'recursive'	 => -1,
+			'callbacks'	 => false,
+		));
+		$this->set('data', $data);
+	}
+
+	/**
 	 * 一覧用の検索条件を生成する
 	 *
 	 * @param array $data
