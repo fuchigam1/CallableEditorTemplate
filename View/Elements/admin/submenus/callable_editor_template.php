@@ -41,3 +41,12 @@
 		</tr>
 	<?php endif ?>
 <?php endif ?>
+<tr>
+	<th>エディタテンプレートメニュー</th>
+	<td>
+		<ul class="cleafix">
+			<li><?php $this->BcBaser->link('エディタテンプレート一覧', array('plugin' => false, 'controller' => 'editor_templates', 'action' => 'index')) ?></li>
+			<li><?php $this->BcBaser->link('エディタテンプレート新規追加', array('plugin' => false, 'controller' => 'editor_templates', 'action' => 'add')) ?></li>
+		</ul>
+	</td>
+</tr>
