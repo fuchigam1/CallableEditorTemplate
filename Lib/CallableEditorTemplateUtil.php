@@ -79,4 +79,26 @@ class CallableEditorTemplateUtil extends Object
 		return $useModel;
 	}
 
+	/**
+	 * 指定のURLを、アクセス制限で許可されているURLか判定する
+	 * - ajaxの利用やURL文字列を利用する箇所にて利用できる
+	 * - BcBaserHelper::link() が利用できない場合に利用できる
+	 * 
+	 * @param int $userGroupId
+	 * @param string $url
+	 *  - Router::url(array('plugin' => 'PLUGIN_NAME', 'controller' => 'CONTROLLER_NAME', 'action' => 'ACTION_NAME'))
+	 * @return boolean
+	 */
+	public static function hasAablePermission($userGroupId, $url)
+	{
+		if (ClassRegistry::isKeySet('Permission')) {
+			$Permission = ClassRegistry::getObject('Permission');
+		} else {
+			$Permission = ClassRegistry::init('Permission');
+		}
+
+		$checkUrl = preg_replace('|^/index.php|', '', $url);
+		return $Permission->check($checkUrl, $userGroupId);
+	}
+
 }
