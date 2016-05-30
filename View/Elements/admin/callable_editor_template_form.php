@@ -30,9 +30,6 @@ $(function(){
 		return false;
 	});
 
-
-	$(".preview-editor-template-box").colorbox({maxWidth:"90%", maxHeight:"90%", inline:true});
-
 	function changeEditorTemplate() {
 		if ($('#PreviewEditorTemplateBox').length) {
 			$('#PreviewEditorTemplateBox').remove();
@@ -42,50 +39,62 @@ $(function(){
 	function getEditorTemplate() {
 		var editorTemplateId = $('#CallableEditorTemplateEditorTemplateId').val();
 		if (editorTemplateId) {
-			$.ajax({
-				url: $.baseUrl + '/<?php echo $this->request->params['prefix'] ?>/callable_editor_template/callable_editor_template_configs/ajax_preview_template',
-				data: {'id':editorTemplateId},
-				dataType: 'json',
-				type: "POST",
-				complete: function(){
-				},
-				success: function(result) {
-					if ('EditorTemplate' in result) {
-						var $editorTemplate = $("<div />", {id: "PreviewEditorTemplateBox", style: "display: none;"}).html(result.EditorTemplate.html);
+				$.ajax({
+					url: $.baseUrl + '/<?php echo $this->request->params['prefix'] ?>/callable_editor_template/callable_editor_template_configs/ajax_preview_template',
+					data: {'id': editorTemplateId},
+					dataType: 'json',
+					type: "POST",
+					complete: function () {
+					},
+					success: function (result) {
+						if ('EditorTemplate' in result) {
+							var $editorTemplate = $("<div />", {id: "PreviewEditorTemplateBox", style: "display: none;"}).html(result.EditorTemplate.html);
 
-						<?php if (CallableEditorTemplateUtil::hasAablePermission($user['user_group_id'], Router::url(array('controller' => 'editor_templates', 'action' => 'edit')))): ?>
-						// エディタテンプレの編集リンクを追加する
-						var linkHtml = '<div style="text-align: right;"><br /><a href="/<?php echo $this->request->params['prefix'] ?>/editor_templates/edit/' + editorTemplateId + '">≫ エディターテンプレート編集</a></div>';
-						$editorTemplate.append($(linkHtml));
-						<?php endif ?>
+<?php if (CallableEditorTemplateUtil::hasAablePermission($user['user_group_id'], Router::url(array('controller' => 'editor_templates', 'action' => 'edit')))): ?>
+								// エディタテンプレの編集リンクを追加する
+								var linkHtml = '<div style="text-align: right;"><br /><a href="' + $.baseUrl + '/<?php echo $this->request->params['prefix'] ?>/editor_templates/edit/' + editorTemplateId + '">≫ エディターテンプレート編集</a></div>';
+								$editorTemplate.append($(linkHtml));
+<?php endif ?>
 
-						// ポップアップ用としてラッピングする
-						$editorTemplate.wrapInner('<div id="preview-editor-template-box-inline">');
+							// ポップアップ用としてラッピングする
+							$editorTemplate.wrapInner('<div id="preview-editor-template-box-inline">');
+							$('#CallableEditorTemplateTable').after($editorTemplate);
+
+							$('.preview-editor-template-box').attr({title: result.EditorTemplate.name});
+							// ポップアップイベントを発生させる
+							$('.preview-editor-template-box').colorbox({
+								maxWidth: "90%",
+								maxHeight: "90%",
+								inline: true,
+								title: result.EditorTemplate.name,
+								onComplete: function() {
+									$.colorbox.resize();	// 画像を含む場合に、内容全体が表示されない場合があるためリサイズする
+									$.colorbox.position(0);
+								}
+							});
+							$('.preview-editor-template-box').trigger('click');
+						}
+					},
+					error: function (xhr, textStatus, errorThrown) {
+						var errorMessage = '<div id="CloseAlertError"><strong>[✕閉じる]</strong></div>';
+						errorMessage += '<span style="color: #C00;">プレビュー動作用のアクセス権限が許可されていません。</span><br>';
+						errorMessage += 'このユーザーが所属するユーザーグループのアクセス権限に、以下のURLを「アクセス可」として追加してください。<br>';
+						errorMessage += '■ ルール名の例「記事別エディターテンプレート呼出プレビュー権限」<br>';
+						errorMessage += '<strong>callable_editor_template/callable_editor_template_configs/ajax_preview_template</strong>';
+
+						var $editorTemplate = $("<div />", {id: "PreviewEditorTemplateBox", style: "display: none;"}).html(errorMessage);
 						$('#CallableEditorTemplateTable').after($editorTemplate);
-						// ポップアップイベントを発生させる
-						$(".preview-editor-template-box").trigger("click");
+						$('#PreviewEditorTemplateBox').slideDown('slow');
+
+						$('#CloseAlertError').on('click', function () {
+							$('#PreviewEditorTemplateBox').slideUp();
+						});
 					}
-				},
-				error: function(xhr, textStatus, errorThrown){
-					var errorMessage = '<div id="CloseAlertError"><strong>[✕閉じる]</strong></div>';
-					errorMessage = errorMessage + '<span style="color: #C00;">プレビュー動作用のアクセス権限が許可されていません。</span><br>';
-					errorMessage = errorMessage + 'このユーザーが所属するユーザーグループのアクセス権限に、以下のURLを「アクセス可」として追加してください。<br>';
-					errorMessage = errorMessage + '■ ルール名の例「記事別エディターテンプレート呼出プレビュー権限」<br>';
-					errorMessage = errorMessage + '<strong>callable_editor_template/callable_editor_template_configs/ajax_preview_template</strong>';
-					
-					var $editorTemplate = $("<div />", {id: "PreviewEditorTemplateBox", style: "display: none;"}).html(errorMessage);
-					$('#CallableEditorTemplateTable').after($editorTemplate);
-					$('#PreviewEditorTemplateBox').slideDown('slow');
-
-					$('#CloseAlertError').on('click', function() {
-						$('#PreviewEditorTemplateBox').slideUp();
-					});
-				}
-			});
+				});
+			}
 		}
-	}
 
-});
+	});
 </script>
 <style>
 	#CallableEditorTemplatePreview,
