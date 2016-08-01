@@ -253,6 +253,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 		switch ($params['action']) {
 			case 'admin_add':
 				// 追加時
+				$data['CallableEditorTemplate']				 = $Model->data['CallableEditorTemplate'];
 				$data['CallableEditorTemplate']['model']	 = $Model->alias;
 				$data['CallableEditorTemplate']['model_id']	 = $contentId;
 				break;
