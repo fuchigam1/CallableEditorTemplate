@@ -10,8 +10,7 @@
  */
 App::uses('CallableEditorTemplateApp', 'CallableEditorTemplate.Controller');
 
-class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppController
-{
+class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppController {
 
 	/**
 	 * ControllerName
@@ -48,8 +47,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 * beforeFilter
 	 *
 	 */
-	public function beforeFilter()
-	{
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
@@ -57,8 +55,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 * [ADMIN] 設定一覧
 	 * 
 	 */
-	public function admin_index()
-	{
+	public function admin_index() {
 		$this->pageTitle = $this->adminTitle . '一覧';
 		$this->search	 = 'callable_editor_template_configs_index';
 		$this->help		 = 'callable_editor_template_configs_index';
@@ -70,8 +67,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 * 
 	 * @param int $id
 	 */
-	public function admin_edit($id = null)
-	{
+	public function admin_edit($id = null) {
 		$this->pageTitle = $this->adminTitle . '編集';
 		parent::admin_edit($id);
 	}
@@ -80,8 +76,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 * [ADMIN] 追加
 	 * 
 	 */
-	public function admin_add()
-	{
+	public function admin_add() {
 		$this->pageTitle = $this->adminTitle . '追加';
 
 		if ($this->request->is('post')) {
@@ -117,8 +112,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 *
 	 * @param int $id
 	 */
-	public function admin_delete($id = null)
-	{
+	public function admin_delete($id = null) {
 		parent::admin_delete($id);
 	}
 
@@ -127,8 +121,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 *   ・記事別エディターテンプレート呼出設定データがないブログ用のデータのみ作成する
 	 * 
 	 */
-	public function admin_first()
-	{
+	public function admin_first() {
 		if ($this->request->data) {
 			$count = 0;
 			if ($this->blogContentDatas) {
@@ -184,8 +177,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 * @param array $data
 	 * @return array $conditions
 	 */
-	public function _createAdminIndexConditions($data)
-	{
+	public function _createAdminIndexConditions($data) {
 		$conditions	 = array();
 		$model		 = '';
 

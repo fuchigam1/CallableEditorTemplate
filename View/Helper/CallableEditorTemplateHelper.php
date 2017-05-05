@@ -8,8 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateHelper extends AppHelper
-{
+class CallableEditorTemplateHelper extends AppHelper {
 
 	/**
 	 * モデル名とコンテンツ名の対応表
@@ -28,8 +27,7 @@ class CallableEditorTemplateHelper extends AppHelper
 	 * @param array $data
 	 * @return boolean 除外状態
 	 */
-	public function allowPublish($data)
-	{
+	public function allowPublish($data) {
 		if (isset($data['CallableEditorTemplate'])) {
 			$data = $data['CallableEditorTemplate'];
 		} elseif (isset($data['CallableEditorTemplateConfig'])) {
@@ -45,8 +43,7 @@ class CallableEditorTemplateHelper extends AppHelper
 	 * @param array $data
 	 * @return boolean
 	 */
-	public function isNotDelete($data = array())
-	{
+	public function isNotDelete($data = array()) {
 		if ($data['CallableEditorTemplateConfig']['model'] == 'Page') {
 			return false;
 		}
@@ -59,8 +56,7 @@ class CallableEditorTemplateHelper extends AppHelper
 	 * @param array $data
 	 * @return string or ''
 	 */
-	public function getCallableEditorTemplateName($data = array())
-	{
+	public function getCallableEditorTemplateName($data = array()) {
 		if ($data) {
 			if (!empty($data['CallableEditorTemplate']['name'])) {
 				return $data['CallableEditorTemplate']['name'];

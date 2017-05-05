@@ -8,8 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateUtil extends Object
-{
+class CallableEditorTemplateUtil extends Object {
 
 	/**
 	 * 設定ファイルから、該当するプラグイン名の設定値を取得する
@@ -18,8 +17,7 @@ class CallableEditorTemplateUtil extends Object
 	 * @param string $targetPluginName
 	 * @return type
 	 */
-	public static function getThisPluginSetting($setting, $targetPluginName)
-	{
+	public static function getThisPluginSetting($setting, $targetPluginName) {
 		$targetData = array();
 		foreach ($setting as $key => $value) {
 			if (strpos($key, '.') === false) {
@@ -34,8 +32,7 @@ class CallableEditorTemplateUtil extends Object
 		return $targetData;
 	}
 
-	public static function getModelTitle($modelName)
-	{
+	public static function getModelTitle($modelName) {
 		$setting	 = Configure::read('CallableEditorTemplate.target');
 		$targetData	 = array();
 		foreach ($setting as $key => $value) {
@@ -52,8 +49,7 @@ class CallableEditorTemplateUtil extends Object
 	 * @param string $value
 	 * @return array
 	 */
-	public static function splitName($value = '')
-	{
+	public static function splitName($value = '') {
 		// 例: $value = Page.name
 		$exploded		 = explode('.', $value);
 		$searchTarget	 = array(
@@ -70,8 +66,7 @@ class CallableEditorTemplateUtil extends Object
 	 * @param array $setting
 	 * @return array
 	 */
-	public static function getUseModel($setting)
-	{
+	public static function getUseModel($setting) {
 		$useModel = array();
 		foreach ($setting as $model => $data) {
 			$useModel[$data['name']] = $data['title'];

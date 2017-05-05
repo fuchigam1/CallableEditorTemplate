@@ -8,8 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateHelperEventListener extends BcHelperEventListener
-{
+class CallableEditorTemplateHelperEventListener extends BcHelperEventListener {
 
 	/**
 	 * 登録イベント
@@ -39,8 +38,7 @@ class CallableEditorTemplateHelperEventListener extends BcHelperEventListener
 	 * @param CakeEvent $event
 	 * @return string
 	 */
-	public function formAfterForm(CakeEvent $event)
-	{
+	public function formAfterForm(CakeEvent $event) {
 		if (!BcUtil::isAdminSystem()) {
 			return;
 		}

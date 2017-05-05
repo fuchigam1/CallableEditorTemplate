@@ -8,8 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateViewEventListener extends BcViewEventListener
-{
+class CallableEditorTemplateViewEventListener extends BcViewEventListener {
 
 	/**
 	 * 登録イベント
@@ -76,8 +75,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 * CallableEditorTemplateConfig モデルを準備する
 	 * 
 	 */
-	private function setUpModel()
-	{
+	private function setUpModel() {
 		if (ClassRegistry::isKeySet('CallableEditorTemplate.CallableEditorTemplateConfig')) {
 			$this->CallableEditorTemplateConfigModel = ClassRegistry::getObject('CallableEditorTemplate.CallableEditorTemplateConfig');
 		} else {
@@ -96,8 +94,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function pagesBeforeRender(CakeEvent $event)
-	{
+	public function pagesBeforeRender(CakeEvent $event) {
 		if (!BcUtil::isAdminSystem()) {
 			return;
 		}
@@ -126,8 +123,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogPostsBeforeRender(CakeEvent $event)
-	{
+	public function blogBlogPostsBeforeRender(CakeEvent $event) {
 		if (!BcUtil::isAdminSystem()) {
 			return;
 		}
@@ -155,8 +151,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 * モデル初期化
 	 * 
 	 */
-	private function modelInitializer()
-	{
+	private function modelInitializer() {
 		if (ClassRegistry::isKeySet('CallableEditorTemplate.CallableEditorTemplate')) {
 			$this->CallableEditorTemplate = ClassRegistry::getObject('CallableEditorTemplate.CallableEditorTemplate');
 		} else {
@@ -170,8 +165,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function contentHeader(CakeEvent $event)
-	{
+	public function contentHeader(CakeEvent $event) {
 		$View = $event->subject();
 		if (BcUtil::isAdminSystem()) {
 			if (!Hash::get($View->viewVars, 'preview')) {
@@ -281,8 +275,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function contentFooter(CakeEvent $event)
-	{
+	public function contentFooter(CakeEvent $event) {
 		$View = $event->subject();
 		if (BcUtil::isAdminSystem()) {
 			if (!Hash::get($View->viewVars, 'preview')) {
@@ -310,8 +303,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener
 	 * @param Object $View
 	 * @param array $data
 	 */
-	private function displayCallableEditorTemplate($View, $data)
-	{
+	private function displayCallableEditorTemplate($View, $data) {
 		if (!Hash::get($data, 'EditorTemplate.id')) {
 			return;
 		}

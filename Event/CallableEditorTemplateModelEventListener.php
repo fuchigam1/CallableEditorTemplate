@@ -8,8 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateModelEventListener extends BcModelEventListener
-{
+class CallableEditorTemplateModelEventListener extends BcModelEventListener {
 
 	/**
 	 * 登録イベント
@@ -46,8 +45,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function editorTemplateAfterSave(CakeEvent $event)
-	{
+	public function editorTemplateAfterSave(CakeEvent $event) {
 		clearAllCache();
 		return;
 	}
@@ -58,8 +56,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * @param CakeEvent $event
 	 * @return boolean
 	 */
-	public function editorTemplateAfterDelete(CakeEvent $event)
-	{
+	public function editorTemplateAfterDelete(CakeEvent $event) {
 		clearAllCache();
 		return true;
 	}
@@ -69,8 +66,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function pageBeforeFind(CakeEvent $event)
-	{
+	public function pageBeforeFind(CakeEvent $event) {
 		$Model		 = $event->subject();
 		$association = array(
 			'CallableEditorTemplate' => array(
@@ -89,8 +85,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogPostBeforeFind(CakeEvent $event)
-	{
+	public function blogBlogPostBeforeFind(CakeEvent $event) {
 		$Model		 = $event->subject();
 		$association = array(
 			'CallableEditorTemplate' => array(
@@ -110,8 +105,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function pageAfterDelete(CakeEvent $event)
-	{
+	public function pageAfterDelete(CakeEvent $event) {
 		$Model						 = $event->subject();
 		$CallableEditorTemplateModel = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplate');
 		$data						 = $CallableEditorTemplateModel->find('first', array('conditions' => array(
@@ -132,8 +126,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogPostAfterDelete(CakeEvent $event)
-	{
+	public function blogBlogPostAfterDelete(CakeEvent $event) {
 		$Model						 = $event->subject();
 		$CallableEditorTemplateModel = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplate');
 		$data						 = $CallableEditorTemplateModel->find('first', array('conditions' => array(
@@ -153,8 +146,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogContentAfterDelete(CakeEvent $event)
-	{
+	public function blogBlogContentAfterDelete(CakeEvent $event) {
 		$Model								 = $event->subject();
 		// ブログ設定削除時、そのコンテンツが持つ記事別エディターテンプレート呼出設定情報を削除する
 		$CallableEditorTemplateConfigModel	 = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplateConfig');
@@ -175,8 +167,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function pageAfterSave(CakeEvent $event)
-	{
+	public function pageAfterSave(CakeEvent $event) {
 		$Model = $event->subject();
 		// CallableEditorTemplateのデータがない場合は save 処理を実施しない
 		if (!isset($Model->data['CallableEditorTemplate']) || empty($Model->data['CallableEditorTemplate'])) {
@@ -194,8 +185,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogPostAfterSave(CakeEvent $event)
-	{
+	public function blogBlogPostAfterSave(CakeEvent $event) {
 		$Model = $event->subject();
 		// CallableEditorTemplateのデータがない場合は save 処理を実施しない
 		if (!isset($Model->data['CallableEditorTemplate']) || empty($Model->data['CallableEditorTemplate'])) {
@@ -221,8 +211,7 @@ class CallableEditorTemplateModelEventListener extends BcModelEventListener
 	 * @param int $contentId
 	 * @return array
 	 */
-	public function generateSaveData($Model, $contentId)
-	{
+	public function generateSaveData($Model, $contentId) {
 		$params								 = Router::getParams();
 		$this->CallableEditorTemplateModel	 = ClassRegistry::init('CallableEditorTemplate.CallableEditorTemplate');
 		$data								 = array();

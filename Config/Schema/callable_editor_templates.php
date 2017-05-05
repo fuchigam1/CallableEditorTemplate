@@ -3,8 +3,6 @@ class CallableEditorTemplatesSchema extends CakeSchema {
 
 	public $file = 'callable_editor_templates.php';
 
-	public $connection = 'plugin';
-
 	public function before($event = array()) {
 		return true;
 	}
@@ -14,7 +12,7 @@ class CallableEditorTemplatesSchema extends CakeSchema {
 
 	public $callable_editor_templates = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary', 'comment' => 'ID'),
-		'model' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'モデル名', 'charset' => 'utf8'),
+		'model' => array('type' => 'string', 'null' => true, 'default' => null, 'comment' => 'モデル名', 'charset' => 'utf8'),
 		'model_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'comment' => 'モデルID'),
 		'editor_template_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'エディターテンプレートID'),
 		'display_before' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => 'コンテンツ上部に表示する'),
@@ -25,7 +23,6 @@ class CallableEditorTemplatesSchema extends CakeSchema {
 			'PRIMARY' => array('column' => 'id', 'unique' => 1),
 			'editor_template_id' => array('column' => 'editor_template_id', 'unique' => 0)
 		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 
 }

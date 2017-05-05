@@ -8,8 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateConfig extends BcPluginAppModel
-{
+class CallableEditorTemplateConfig extends BcPluginAppModel {
 
 	/**
 	 * ModelName
@@ -37,8 +36,7 @@ class CallableEditorTemplateConfig extends BcPluginAppModel
 	 *
 	 * @return array
 	 */
-	public function getDefaultValue()
-	{
+	public function getDefaultValue() {
 		$data = array(
 			$this->name => array(
 				'status'		 => false,

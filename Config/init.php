@@ -4,7 +4,7 @@
  * [Config] CallableEditorTemplate プラグイン用
  * データベース初期化
  */
-$this->Plugin->initDb('plugin', 'CallableEditorTemplate');
+$this->Plugin->initDb('CallableEditorTemplate');
 /**
  * 固定ページ用設定データを作成する
  * 
