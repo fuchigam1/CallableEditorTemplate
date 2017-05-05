@@ -184,7 +184,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener {
 
 		if ($View->BcBaser->isPage()) {
 			$modelName	 = 'Page';
-			$modelId	 = Hash::get($View->request->data, 'Page.id');
+			$modelId	 = Hash::get($View->request->params, 'Content.entity_id');
 
 			$this->setUpModel();
 			$configData = $this->CallableEditorTemplateConfigModel->find('first', array(
@@ -260,7 +260,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener {
 		}
 
 		$this->callableEditorTemplateConfigData = $configData;
-		if (!Hash::get($this->callableEditorTemplateConfigData, 'CallableEditorTemplate.auto_display')) {
+		if (!Hash::get($this->callableEditorTemplateConfigData, 'CallableEditorTemplateConfig.auto_display')) {
 			return;
 		}
 
@@ -288,7 +288,7 @@ class CallableEditorTemplateViewEventListener extends BcViewEventListener {
 			return;
 		}
 
-		if (!Hash::get($this->callableEditorTemplateConfigData, 'CallableEditorTemplate.auto_display')) {
+		if (!Hash::get($this->callableEditorTemplateConfigData, 'CallableEditorTemplateConfig.auto_display')) {
 			return;
 		}
 
