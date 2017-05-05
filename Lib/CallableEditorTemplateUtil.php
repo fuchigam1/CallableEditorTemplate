@@ -84,8 +84,7 @@ class CallableEditorTemplateUtil extends Object {
 	 *  - Router::url(array('plugin' => 'PLUGIN_NAME', 'controller' => 'CONTROLLER_NAME', 'action' => 'ACTION_NAME'))
 	 * @return boolean
 	 */
-	public static function hasAablePermission($userGroupId, $url)
-	{
+	public static function hasAablePermission($userGroupId, $url) {
 		if (ClassRegistry::isKeySet('Permission')) {
 			$Permission = ClassRegistry::getObject('Permission');
 		} else {

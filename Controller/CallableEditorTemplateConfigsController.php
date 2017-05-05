@@ -152,8 +152,7 @@ class CallableEditorTemplateConfigsController extends CallableEditorTemplateAppC
 	 * エディターテンプレートのプレビュー用呼出し
 	 * 
 	 */
-	public function admin_ajax_preview_template()
-	{
+	public function admin_ajax_preview_template() {
 		$id = $this->request->data['id'];
 
 		if (ClassRegistry::isKeySet('EditorTemplate')) {

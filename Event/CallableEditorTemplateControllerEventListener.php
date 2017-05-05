@@ -8,8 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateControllerEventListener extends BcControllerEventListener
-{
+class CallableEditorTemplateControllerEventListener extends BcControllerEventListener {
 
 	/**
 	 * 登録イベント
@@ -26,8 +25,7 @@ class CallableEditorTemplateControllerEventListener extends BcControllerEventLis
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function initialize(CakeEvent $event)
-	{
+	public function initialize(CakeEvent $event) {
 		$Controller				 = $event->subject();
 		$Controller->helpers[]	 = 'CallableEditorTemplate.CallableEditorTemplate';
 	}

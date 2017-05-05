@@ -8,7 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateAppController extends BcPluginAppController {
+class CallableEditorTemplateAppController extends AppController {
 
 	/**
 	 * Component
@@ -55,8 +55,16 @@ class CallableEditorTemplateAppController extends BcPluginAppController {
 		parent::beforeFilter();
 
 		// ブログ情報を取得
-		$BlogContentModel		 = ClassRegistry::init('Blog.BlogContent');
-		$this->blogContentDatas	 = $BlogContentModel->find('list', array('recursive' => -1));
+		$ContentModel			 = ClassRegistry::init('Content');
+		$this->blogContentDatas	 = $ContentModel->find('list', array(
+			'fields'	 => array('entity_id', 'title'),
+			'conditions' => array(
+				'Content.plugin' => 'Blog',
+				'Content.type'	 => 'BlogContent',
+				'Content.status' => true,
+			),
+			'recursive'	 => -1,
+		));
 	}
 
 	/**
@@ -162,12 +170,13 @@ class CallableEditorTemplateAppController extends BcPluginAppController {
 	 * @param int $id
 	 */
 	public function admin_ajax_delete($id = null) {
+		$this->_checkSubmitToken();
 		if (!$id) {
 			$this->ajaxError(500, '無効な処理です。');
 		}
 		// 削除実行
 		if ($this->_delete($id)) {
-			clearViewCache();
+			clearAllCache();
 			exit(true);
 		}
 		exit();
@@ -233,11 +242,12 @@ class CallableEditorTemplateAppController extends BcPluginAppController {
 	 * @param int $id
 	 */
 	public function admin_ajax_unpublish($id) {
+		$this->_checkSubmitToken();
 		if (!$id) {
 			$this->ajaxError(500, '無効な処理です。');
 		}
 		if ($this->_changeStatus($id, false)) {
-			clearViewCache();
+			clearAllCache();
 			exit(true);
 		} else {
 			$this->ajaxError(500, $this->{$this->modelClass}->validationErrors);
@@ -251,11 +261,12 @@ class CallableEditorTemplateAppController extends BcPluginAppController {
 	 * @param int $id
 	 */
 	public function admin_ajax_publish($id) {
+		$this->_checkSubmitToken();
 		if (!$id) {
 			$this->ajaxError(500, '無効な処理です。');
 		}
 		if ($this->_changeStatus($id, true)) {
-			clearViewCache();
+			clearAllCache();
 			exit(true);
 		} else {
 			$this->ajaxError(500, $this->{$this->modelClass}->validationErrors);

@@ -71,8 +71,7 @@ class CallableEditorTemplateHelper extends AppHelper {
 	 * @param array $data
 	 * @return boolean
 	 */
-	public function isShowable($data)
-	{
+	public function isShowable($data) {
 		if (Hash::get($data, 'CallableEditorTemplate.status')) {
 			return true;
 		}
@@ -85,8 +84,7 @@ class CallableEditorTemplateHelper extends AppHelper {
 	 * @param array $data
 	 * @return string
 	 */
-	public function getEditorTemplate($data)
-	{
+	public function getEditorTemplate($data) {
 		$html = '';
 		if (!$this->isShowable($data)) {
 			return $html;
