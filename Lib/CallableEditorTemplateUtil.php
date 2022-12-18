@@ -8,7 +8,7 @@
  * @package			CallableEditorTemplate
  * @license			MIT
  */
-class CallableEditorTemplateUtil extends Object {
+class CallableEditorTemplateUtil {
 
 	/**
 	 * 設定ファイルから、該当するプラグイン名の設定値を取得する
