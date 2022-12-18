@@ -12,28 +12,28 @@ class CallableEditorTemplate extends BcPluginAppModel {
 
 	/**
 	 * ModelName
-	 * 
+	 *
 	 * @var string
 	 */
 	public $name = 'CallableEditorTemplate';
 
 	/**
 	 * PluginName
-	 * 
+	 *
 	 * @var string
 	 */
 	public $plugin = 'CallableEditorTemplate';
 
 	/**
 	 * actsAs
-	 * 
+	 *
 	 * @var array
 	 */
 	public $actsAs = array('BcCache');
 
 	/**
 	 * belongsTo
-	 * 
+	 *
 	 * @var array
 	 */
 	public $belongsTo = array(
