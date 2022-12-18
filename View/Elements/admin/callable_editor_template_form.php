@@ -103,12 +103,12 @@ $(function(){
 	}
 </style>
 
-<table cellpadding="0" cellspacing="0" class="form-table section" id="CallableEditorTemplateTable">
+<table cellpadding="0" cellspacing="0" class="form-table section bca-form-table" id="CallableEditorTemplateTable">
 	<tr>
-		<th>
+		<th class="col-head bca-form-table__label">
 			<?php echo $this->BcForm->label('CallableEditorTemplate.editor_template_id', $labelName) ?>
 		</th>
-		<td class="col-input">
+		<td class="col-input bca-form-table__input">
 			<?php echo $this->BcForm->input('CallableEditorTemplate.editor_template_id', array(
 				'type' => 'select', 'options' => $editorTemplateList, 'empty' => '表示しない',
 			)) ?>
